@@ -13,7 +13,6 @@ import {
   Divider,
 } from '@mui/material';
 import {
-  MedicalServices,
   Lock,
   Person,
 } from '@mui/icons-material';
@@ -82,24 +81,19 @@ const Login = () => {
         >
           {/* Logo and Title */}
           <Box sx={{ textAlign: 'center', mb: 4 }}>
-            <Avatar
-              sx={{
-                backgroundColor: 'primary.main',
-                width: 80,
-                height: 80,
-                mx: 'auto',
-                mb: 2,
-              }}
-            >
-              <MedicalServices sx={{ fontSize: 40 }} />
-            </Avatar>
-            <Typography variant="h3" sx={{ fontWeight: 600, mb: 1 }}>
-              Smart HMS
-            </Typography>
-            <Typography variant="h6" color="text.secondary">
-              Sign in to your account
-            </Typography>
-          </Box>
+  <Avatar
+    src="/healthcare.png"
+    alt="Smart HMS App"
+    variant="circular"
+    sx={{ width: 80, height: 80, mx: 'auto', mb: 2 }}
+  />
+  <Typography variant="h3" sx={{ fontWeight: 600, mb: 1 }}>
+    Smart HMS
+  </Typography>
+  <Typography variant="h6" color="text.secondary">
+    Sign in to your account
+  </Typography>
+</Box>
 
           <Box component="form" onSubmit={handleSubmit} sx={{ width: '100%' }}>
             {error && (
