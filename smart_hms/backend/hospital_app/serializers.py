@@ -46,11 +46,18 @@ class AppointmentSerializer(serializers.ModelSerializer):
     """Appointment serializer"""
     patient_name = serializers.CharField(source='patient.user.get_full_name', read_only=True)
     doctor_name = serializers.CharField(source='doctor.user.get_full_name', read_only=True)
+    appointment_time = serializers.SerializerMethodField()
     
     class Meta:
         model = Appointment
-        fields = ['id', 'patient', 'doctor', 'patient_name', 'doctor_name', 'appointment_date', 'status', 'reason', 'notes', 'created_at', 'updated_at']
+        fields = ['id', 'patient', 'doctor', 'patient_name', 'doctor_name', 'appointment_date', 'appointment_time', 'status', 'reason', 'notes', 'created_at', 'updated_at']
         read_only_fields = ['id', 'created_at', 'updated_at']
+    
+    def get_appointment_time(self, obj):
+        """Extract time from appointment_date"""
+        if obj.appointment_date:
+            return obj.appointment_date.strftime('%H:%M')
+        return None
 
 
 class MedicalRecordSerializer(serializers.ModelSerializer):

@@ -70,6 +70,16 @@ class Command(BaseCommand):
                 'license_number': 'DOC000004',
                 'experience_years': 8,
                 'consultation_fee': 120.00
+            },
+            {
+                'username': 'dr_davis',
+                'email': 'dr.davis@hospital.com',
+                'first_name': 'Robert',
+                'last_name': 'Davis',
+                'specialization': 'general',
+                'license_number': 'DOC000005',
+                'experience_years': 20,
+                'consultation_fee': 100.00
             }
         ]
         
@@ -147,6 +157,69 @@ class Command(BaseCommand):
                 'phone_number': '555-1005',
                 'blood_type': 'A-',
                 'allergies': 'Aspirin'
+            },
+            {
+                'username': 'patient6',
+                'email': 'patient6@email.com',
+                'first_name': 'Frank',
+                'last_name': 'Miller',
+                'phone_number': '555-1006',
+                'blood_type': 'B-',
+                'allergies': 'None'
+            },
+            {
+                'username': 'patient7',
+                'email': 'patient7@email.com',
+                'first_name': 'Grace',
+                'last_name': 'Taylor',
+                'phone_number': '555-1007',
+                'blood_type': 'O-',
+                'allergies': 'Peanuts'
+            },
+            {
+                'username': 'patient8',
+                'email': 'patient8@email.com',
+                'first_name': 'Henry',
+                'last_name': 'Anderson',
+                'phone_number': '555-1008',
+                'blood_type': 'AB-',
+                'allergies': 'None'
+            },
+            {
+                'username': 'patient9',
+                'email': 'patient9@email.com',
+                'first_name': 'Ivy',
+                'last_name': 'Thomas',
+                'phone_number': '555-1009',
+                'blood_type': 'A+',
+                'allergies': 'Dust'
+            },
+            {
+                'username': 'patient10',
+                'email': 'patient10@email.com',
+                'first_name': 'Jack',
+                'last_name': 'Jackson',
+                'phone_number': '555-1010',
+                'blood_type': 'B+',
+                'allergies': 'None'
+            },
+            {
+                'username': 'patient11',
+                'email': 'patient11@email.com',
+                'first_name': 'Kate',
+                'last_name': 'White',
+                'phone_number': '555-1011',
+                'blood_type': 'O+',
+                'allergies': 'Cats'
+            },
+            {
+                'username': 'patient12',
+                'email': 'patient12@email.com',
+                'first_name': 'Liam',
+                'last_name': 'Harris',
+                'phone_number': '555-1012',
+                'blood_type': 'A-',
+                'allergies': 'None'
             }
         ]
         
@@ -191,10 +264,11 @@ class Command(BaseCommand):
             'Diabetes management'
         ]
         
-        for i in range(20):
+        # Create only 2 appointments for realistic demo
+        for i in range(2):
             patient = random.choice(patients)
             doctor = random.choice(doctors)
-            appointment_date = timezone.now() + timedelta(days=random.randint(-30, 30))
+            appointment_date = timezone.now() + timedelta(days=random.randint(-7, 7))
             
             appointment, created = Appointment.objects.get_or_create(
                 patient=patient,
@@ -202,7 +276,7 @@ class Command(BaseCommand):
                 appointment_date=appointment_date,
                 defaults={
                     'reason': random.choice(appointment_reasons),
-                    'status': random.choice(['scheduled', 'confirmed', 'completed']),
+                    'status': random.choice(['scheduled', 'confirmed']),
                     'notes': f'Appointment notes for {patient.user.get_full_name()}'
                 }
             )
@@ -293,5 +367,5 @@ class Command(BaseCommand):
         )
         self.stdout.write('Sample users created:')
         self.stdout.write('Admin: admin / admin123')
-        self.stdout.write('Doctors: dr_smith, dr_johnson, dr_williams, dr_brown / doctor123')
-        self.stdout.write('Patients: patient1, patient2, patient3, patient4, patient5 / patient123')
+        self.stdout.write('Doctors: dr_smith, dr_johnson, dr_williams, dr_brown, dr_davis / doctor123')
+        self.stdout.write('Patients: patient1, patient2, patient3, patient4, patient5, patient6, patient7, patient8, patient9, patient10, patient11, patient12 / patient123')

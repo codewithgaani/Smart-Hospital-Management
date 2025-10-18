@@ -29,24 +29,25 @@ const Analytics = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Mock data for demo
+    // Mock data for demo with realistic numbers
     setAnalyticsData({
-      totalPatients: 1247,
-      totalDoctors: 45,
-      totalAppointments: 89,
-      revenue: 125000,
-      patientGrowth: 12.5,
-      appointmentGrowth: 8.3,
-      revenueGrowth: 15.2,
+      totalPatients: 12,
+      totalDoctors: 5,
+      totalAppointments: 2,
+      revenue: 650,
+      patientGrowth: 2.5,
+      appointmentGrowth: 1.2,
+      revenueGrowth: 3.8,
       topSpecializations: [
-        { name: 'Cardiology', count: 234, growth: 15 },
-        { name: 'Neurology', count: 189, growth: 8 },
-        { name: 'Dermatology', count: 156, growth: 12 },
-        { name: 'Orthopedics', count: 143, growth: 6 },
+        { name: 'Cardiology', count: 3, growth: 2 },
+        { name: 'Neurology', count: 2, growth: 1 },
+        { name: 'Orthopedics', count: 2, growth: 1 },
+        { name: 'Pediatrics', count: 2, growth: 1 },
+        { name: 'General', count: 3, growth: 2 },
       ],
       monthlyStats: [
-        { month: 'Jan', patients: 1200, appointments: 85, revenue: 120000 },
-        { month: 'Feb', patients: 1247, appointments: 89, revenue: 125000 },
+        { month: 'Jan', patients: 10, appointments: 1, revenue: 500 },
+        { month: 'Feb', patients: 12, appointments: 2, revenue: 650 },
       ],
     });
     setLoading(false);

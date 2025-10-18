@@ -2,6 +2,26 @@
 
 A comprehensive AI-powered hospital management system built with Django REST API backend and React frontend, featuring role-based access control, appointment management, and AI symptom checker.
 
+## 🌐 Live Demo
+
+- **Frontend**: [https://smart-hms-frontend.vercel.app](https://smart-hms-frontend.vercel.app)
+- **Backend API**: [https://smart-hms-backend.onrender.com/api/](https://smart-hms-backend.onrender.com/api/)
+- **Admin Panel**: [https://smart-hms-backend.onrender.com/admin/](https://smart-hms-backend.onrender.com/admin/)
+
+## 🔐 Demo Credentials
+
+### Admin Account
+- **Username**: `admin`
+- **Password**: `admin123`
+
+### Doctor Accounts
+- **Username**: `dr_smith` | **Password**: `doctor123`
+- **Username**: `dr_johnson` | **Password**: `doctor123`
+
+### Patient Accounts
+- **Username**: `patient1` | **Password**: `patient123`
+- **Username**: `patient2` | **Password**: `patient123`
+
 ## 🏥 Features
 
 ### Core Functionality

@@ -21,7 +21,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const savedUser = localStorage.getItem("user");
     const savedRole = localStorage.getItem("role");
-    const savedToken = localStorage.getItem("token");
+    const savedToken = localStorage.getItem("access_token");
     if (savedUser && savedToken) {
       setUser(JSON.parse(savedUser));
       setRole(savedRole);
@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }) => {
     try {
       setLoading(true);
       console.log('Attempting login with:', credentials);
-      const response = await fetch('http://localhost:8000/api/auth/login/', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/auth/login/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -59,7 +59,7 @@ export const AuthProvider = ({ children }) => {
       
       localStorage.setItem("user", JSON.stringify(userData));
       localStorage.setItem("role", userData.role);
-      localStorage.setItem("token", tokens.access);
+      localStorage.setItem("access_token", tokens.access);
       localStorage.setItem("refresh_token", tokens.refresh);
       
       return { success: true, user: userData };
@@ -77,7 +77,7 @@ export const AuthProvider = ({ children }) => {
     try {
       setLoading(true);
       console.log('Attempting registration with:', userData);
-      const response = await fetch('http://localhost:8000/api/auth/register/', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/auth/register/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -102,7 +102,7 @@ export const AuthProvider = ({ children }) => {
       
       localStorage.setItem("user", JSON.stringify(newUser));
       localStorage.setItem("role", newUser.role);
-      localStorage.setItem("token", tokens.access);
+      localStorage.setItem("access_token", tokens.access);
       localStorage.setItem("refresh_token", tokens.refresh);
       
       return { success: true, user: newUser };
@@ -123,7 +123,7 @@ export const AuthProvider = ({ children }) => {
     setIsAuthenticated(false);
     localStorage.removeItem("user");
     localStorage.removeItem("role");
-    localStorage.removeItem("token");
+    localStorage.removeItem("access_token");
     localStorage.removeItem("refresh_token");
   };
 

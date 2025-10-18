@@ -287,18 +287,44 @@ class DashboardView(APIView):
             
         elif user.role == 'admin':
             # Admin dashboard data
+            from django.utils import timezone
+            from datetime import datetime, timedelta
+            
             total_users = User.objects.count()
             total_appointments = Appointment.objects.count()
             total_doctors = Doctor.objects.count()
             total_patients = Patient.objects.count()
             
+            # Calculate today's appointments
+            today = timezone.now().date()
+            today_appointments = Appointment.objects.filter(
+                appointment_date__date=today
+            ).count()
+            
+            # Calculate pending appointments (scheduled + confirmed)
+            pending_appointments = Appointment.objects.filter(
+                status__in=['scheduled', 'confirmed']
+            ).count()
+            
+            # Calculate completed appointments
+            completed_appointments = Appointment.objects.filter(
+                status='completed'
+            ).count()
+            
+            # Get recent appointments for display
+            recent_appointments = Appointment.objects.select_related(
+                'patient__user', 'doctor__user'
+            ).order_by('-appointment_date')[:5]
+            
             data.update({
-                'stats': {
-                    'total_users': total_users,
-                    'total_appointments': total_appointments,
-                    'total_doctors': total_doctors,
-                    'total_patients': total_patients,
-                }
+                'total_users': total_users,
+                'total_appointments': total_appointments,
+                'total_doctors': total_doctors,
+                'total_patients': total_patients,
+                'today_appointments': today_appointments,
+                'pending_appointments': pending_appointments,
+                'completed_appointments': completed_appointments,
+                'recent_appointments': AppointmentSerializer(recent_appointments, many=True).data,
             })
         
         return Response(data)

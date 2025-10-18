@@ -51,12 +51,12 @@ const Dashboard = () => {
         console.error('Error fetching dashboard data:', error);
         // Mock data for demo purposes
         setDashboardData({
-          total_patients: 1247,
-          total_doctors: 45,
-          total_appointments: 89,
-          today_appointments: 12,
-          pending_appointments: 23,
-          completed_appointments: 66,
+          total_patients: 12,
+          total_doctors: 5,
+          total_appointments: 2,
+          today_appointments: 1,
+          pending_appointments: 2,
+          completed_appointments: 0,
           recent_appointments: [
             {
               id: 1,
@@ -73,14 +73,6 @@ const Dashboard = () => {
               date: '2024-01-15',
               time: '11:30 AM',
               status: 'completed',
-            },
-            {
-              id: 3,
-              patient_name: 'Mike Wilson',
-              doctor_name: 'Dr. Brown',
-              date: '2024-01-15',
-              time: '2:00 PM',
-              status: 'pending',
             },
           ],
         });
@@ -308,17 +300,21 @@ const Dashboard = () => {
                   <TableRow key={appointment.id} hover>
                     <TableCell>
                       <Typography variant="body2" sx={{ fontWeight: 500 }}>
-                        {appointment.patient_name}
+                        {appointment.patient_name || appointment.patient?.user?.get_full_name?.() || 'N/A'}
                       </Typography>
                     </TableCell>
                     <TableCell>
                       <Typography variant="body2">
-                        {appointment.doctor_name}
+                        {appointment.doctor_name || appointment.doctor?.user?.get_full_name?.() || 'N/A'}
                       </Typography>
                     </TableCell>
                     <TableCell>
                       <Typography variant="body2">
-                        {appointment.date} at {appointment.time}
+                        {appointment.date ? 
+                          `${appointment.date} at ${appointment.time}` : 
+                          new Date(appointment.appointment_date).toLocaleDateString() + ' at ' + 
+                          new Date(appointment.appointment_date).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
+                        }
                       </Typography>
                     </TableCell>
                     <TableCell>
