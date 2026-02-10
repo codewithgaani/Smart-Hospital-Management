@@ -228,7 +228,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👥 Authors
 
-- **Shorya** - *Initial work* - [Shorya06](https://github.com/Shorya06)
+- **Krishna** - *Initial work* - [codewithgaani](https://github.com/codewithgaani)
+- Collaborated later with a team of 3 members.
 
 ## 🙏 Acknowledgments
 
